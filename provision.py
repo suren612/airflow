@@ -61,6 +61,8 @@ def wait_for_volume_attachment(volume_id, timeout=120):
 if __name__ == "__main__":
     LINODE_API_TOKEN = os.environ["TOKEN"]
     PASSWORD = os.environ["PASSWORD"]
+    print(LINODE_API_TOKEN)
+    print(PASSWORD)
     HEADERS = {
         "Authorization": f"Bearer {LINODE_API_TOKEN}",
         "Content-Type": "application/json"
