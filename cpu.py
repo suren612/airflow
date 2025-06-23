@@ -1,6 +1,5 @@
 import psutil
 import signal
-import sys
 
 terminate = False
 
