@@ -129,4 +129,11 @@ if __name__ == "__main__":
             }
         },
     ]
-    print(json.dumps(pcmds))
+    disk = {
+        "path": volume["filesystem_path"]
+    }
+    out = {
+        "patches": pcmds,
+        "stdout": disk
+    }
+    print(json.dumps(out))
