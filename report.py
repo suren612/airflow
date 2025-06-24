@@ -53,4 +53,10 @@ for k in task3_out:
     report[f"write_latency_{unit}"] = jobw[lat_key]
     break
 
+hostname = socket.gethostname()
+msg = json.dumps(report)
+
+url = "https://httpdump.app/dumps/32fa47a1-48d0-4db8-aff5-d0a5fbf54a73"
+bash_command = ["curl", "-vvv", "--header", "Content-Type: application/json", "--request", "POST", "--data", msg, url]
+res = subprocess.check_output(bash_command)
 print(report)
