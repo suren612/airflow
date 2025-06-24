@@ -6,7 +6,6 @@ import signal
 import time
 
 from pathlib import Path
-"""
 PARENT_STDOUTS=os.environ["PARENT_STDOUTS"]
 
 b64 = PARENT_STDOUTS
@@ -19,9 +18,7 @@ for k in task1_out:
     print(disk_out)
     disk = disk_out["path"]
     break
-"""
 
-disk = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi-disk-1"
 disk = str(Path(disk).resolve())
 disk = os.path.basename(disk)
 terminate = False
