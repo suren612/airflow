@@ -130,7 +130,9 @@ if __name__ == "__main__":
         },
     ]
     disk = {
-        "path": volume["filesystem_path"]
+        "path": volume["filesystem_path"],
+        "linode": linode["id"],
+        "volume": volume["id"]
     }
     out = {
         "patches": pcmds,

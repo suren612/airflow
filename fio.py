@@ -18,7 +18,7 @@ for k in task1_out:
     DISK = disk_out["path"]
     break
 
-print(f"{DISK=}, {FIO_RUNTIME=}, {FIO_OP=}")
+#print(f"{DISK=}, {FIO_RUNTIME=}, {FIO_OP=}")
 out = subprocess.check_output(["fio", "--filename", DISK, "--direct", "1", "--rw", FIO_OP, "--bs", "4k", "--ioengine", "libaio", "--iodepth", "16","--runtime", FIO_RUNTIME, "--numjobs", "1", "--time_based", "--group_reporting", "--name", "iops-test", "--output-format", "json"])
 
 print(out)
