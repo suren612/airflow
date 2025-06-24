@@ -20,13 +20,13 @@ for k in task1_out:
     break
 
 for k in task2_out:
-    iops_out = task2_out[k]["stdout"]
+    iops_out = json.loads(task2_out[k]["stdout"])
     report["read_iops_average"] = iops_out["read"]
     report["write_iops_average"] = iops_out["write"]
     break
 
 for k in task3_out:
-    fio_out = task3_out[k]["stdout"]
+    fio_out = json.loads(task3_out[k]["stdout"])
     jobr = fio_out["jobs"][0]["read"]
     jobw = fio_out["jobs"][0]["write"]
     lat_key = ""
