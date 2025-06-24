@@ -54,6 +54,11 @@ if __name__ == "__main__":
         break
 
     LINODE_API_TOKEN = os.environ["TOKEN"]
+    """
+    LINODE_API_TOKEN = ""
+    LINODE_ID = "79183117"
+    VOLUME_ID = "10030444"
+    """
     #print(LINODE_API_TOKEN)
     HEADERS = {
         "Authorization": f"Bearer {LINODE_API_TOKEN}",
