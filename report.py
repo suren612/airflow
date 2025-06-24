@@ -26,7 +26,7 @@ for k in task2_out:
     break
 
 for k in task3_out:
-    fio_out = json.loads((task3_out[k]["stdout"]).decode("utf-8"))
+    fio_out = json.loads(task3_out[k]["stdout"])
     jobr = fio_out["jobs"][0]["read"]
     jobw = fio_out["jobs"][0]["write"]
     lat_key = ""
