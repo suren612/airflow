@@ -15,7 +15,6 @@ pouts_json = json.loads(pouts)
 task1_out = json.loads(pouts_json[0])
 for k in task1_out:
     disk_out = task1_out[k]["stdout"]
-    print(disk_out)
     DISK = disk_out["path"]
     break
 

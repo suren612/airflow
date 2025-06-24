@@ -4,9 +4,6 @@ import os
 import subprocess
 
 PARENT_STDOUTS=os.environ["PARENT_STDOUTS"]
-DISK=""
-FIO_RUNTIME=os.environ["FIO_RUNTIME"]
-FIO_OP=os.environ["FIO_OP"]
 
 report = {}
 
