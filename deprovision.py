@@ -46,9 +46,9 @@ if __name__ == "__main__":
     utf8 = base64.b64decode(b64)
     pouts = utf8.decode('utf-8')
     pouts_json = json.loads(pouts)
-    task1_out = json.loads(pouts_json[0])
+    task1_out = json.loads(pouts_json[0][0])
     for k in task1_out:
-        prov_out = task1_out[k]["stdout"]
+        prov_out = task1_out[k]["stdout"]["stdout"]
         LINODE_ID = prov_out["linode"]
         VOLUME_ID = prov_out["volume"]
         break
