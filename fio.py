@@ -12,9 +12,9 @@ b64 = PARENT_STDOUTS
 utf8 = base64.b64decode(b64)
 pouts = utf8.decode('utf-8')
 pouts_json = json.loads(pouts)
-task1_out = json.loads(pouts_json[0])
+task1_out = json.loads(pouts_json[0][0])
 for k in task1_out:
-    disk_out = task1_out[k]["stdout"]
+    disk_out = task1_out[k]["stdout"]["stdout"]
     DISK = disk_out["path"]
     break
 
