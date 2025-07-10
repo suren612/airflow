@@ -4,7 +4,7 @@ import requests
 import time
 
 HEADERS = {}
-def create_linode(password, region="us-east", image="linode/ubuntu24.04", type_="g6-standard-1", label="linode-client-host-mon"):
+def create_linode(password, region="us-east", image="linode/ubuntu24.04", type_="g6-standard-1", label="linode-test-client", firewall=None):
     url = "https://api.linode.com/v4/linode/instances"
     payload = {
         "region": region,
@@ -13,9 +13,10 @@ def create_linode(password, region="us-east", image="linode/ubuntu24.04", type_=
         "label": label,
         "root_pass": password,
         "private_ip": False,
-        "firewall_id": 604650,
         "authorized_keys": ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDW3F/rcfXIjElkQ/zL6HIXOfNjUNuFFK4ErGSdXaoByLBB9TBaqIArWNoqktiz8211WXXucLNm1T4kn5LrouFQ/p95li/tBU+rQ+bCNfAiZ6OMnkFIZa7I8r6ENFzbmRbdHs4n0r9CB3LxGaa4+Y8Tw1zGhJAWl1EBdnRKxVLdqIdk4WWv1WRNBt3py87hX+u5yAld/y96SWVpZIZJRnyq1uXz4uwoc5bGGwIchkU9bHESawQWTHDTKXoAX3p7INWKXvHYtopOfohRwyGPTCHP820OM/0m6CRSnwBpUc2+N3Pa9blnqkxuczGjHWZxO8kesBaAfxalJzj+v6PaxMM/ swijeyas-test-2025-06-04"]
     }
+    if firewall != None:
+        payload["firewall_id"] = firewall
     resp = requests.post(url, json=payload, headers=HEADERS)
     #print(resp.text)
     resp.raise_for_status()
@@ -61,6 +62,12 @@ def wait_for_volume_attachment(volume_id, timeout=120):
 if __name__ == "__main__":
     LINODE_API_TOKEN = os.environ["TOKEN"]
     PASSWORD = os.environ["PASSWORD"]
+    REGION = os.environ["REGION"]
+    IMAGE = os.environ["IMAGE"]
+    LINODE_TYPE = os.environ["LINODE_TYPE"]
+    LINODE_FIREWALL = None
+    if "LINODE_FIREWALL" in os.environ:
+        LINODE_FIREWALL = os.environ["LINODE_FIREWALL"]
     #print(LINODE_API_TOKEN)
     #print(PASSWORD)
     HEADERS = {
@@ -68,7 +75,7 @@ if __name__ == "__main__":
         "Content-Type": "application/json"
     }
     # 1. Create Linode
-    linode = create_linode(PASSWORD)
+    linode = create_linode(PASSWORD, region=REGION, image=IMAGE, type_=LINODE_TYPE, firewall=LINODE_FIREWALL)
     #print(f"Created Linode: {linode['id']}")
     # 2. Wait for Linode to boot
     wait_for_linode_status(linode['id'])
@@ -95,39 +102,7 @@ if __name__ == "__main__":
                     linode['ipv4'][0]
                 ]
             }
-        },
-        {
-            "group_role": "host",
-            "data": {
-                "connection": {
-                    "user": {
-                        "value": "root"
-                    },
-                    "sshKey": {
-                        "value": "/opt/airflow/config/key"
-                    }
-                },
-                "machines": [
-                    linode['ipv4'][0]
-                ]
-            }
-        },
-        {
-            "group_role": "mon",
-            "data": {
-                "connection": {
-                    "user": {
-                        "value": "root"
-                    },
-                    "sshKey": {
-                        "value": "/opt/airflow/config/key"
-                    }
-                },
-                "machines": [
-                    linode['ipv4'][0]
-                ]
-            }
-        },
+        }
     ]
     disk = {
         "path": volume["filesystem_path"],
