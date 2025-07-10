@@ -4,6 +4,7 @@ import os
 import subprocess
 
 PARENT_STDOUTS=os.environ["PARENT_STDOUTS"]
+DUMP_URL=os.environ["DUMP_URL"]
 
 report = {}
 
@@ -55,7 +56,7 @@ for k in task3_out:
 
 msg = json.dumps(report)
 
-url = "https://httpdump.app/dumps/32fa47a1-48d0-4db8-aff5-d0a5fbf54a73"
+url = DUMP_URL
 bash_command = ["curl", "-vvv", "--header", "Content-Type: application/json", "--request", "POST", "--data", msg, url]
 res = subprocess.check_output(bash_command)
 print(report)
