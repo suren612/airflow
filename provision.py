@@ -77,6 +77,7 @@ if __name__ == "__main__":
     }
     # 1. Create Linode
     linode = create_linode(LINODE_API_DOMAIN, PASSWORD, region=REGION, image=IMAGE, type_=LINODE_TYPE, firewall=LINODE_FIREWALL)
+    time.sleep(5)
     #print(f"Created Linode: {linode['id']}")
     # 2. Wait for Linode to boot
     wait_for_linode_status(LINODE_API_DOMAIN, linode['id'])
@@ -84,6 +85,7 @@ if __name__ == "__main__":
     # 3. Create Volume
     volume = create_volume(LINODE_API_DOMAIN, linode['region'], int(linode['id']), size=20)
     #print(f"Created Volume: {volume['id']}")
+    time.sleep(5)
     # 4. Wait for attachment
     wait_for_volume_attachment(LINODE_API_DOMAIN, volume['id'])
     #print("Volume attached successfully.")
