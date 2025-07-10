@@ -1,0 +1,1 @@
+echo '{"patches": [{"command": 1, "group_role": "groupRoleClient", "data": {"connection": {"user": {"value": "root"}, "sshKey": {"value": "/opt/airflow/config/key"}}, "machines": ["100.95.4.5"]}}], "stdout": {"path": "/dev/disk/by-id/scsi-0Linode_Volume_my-volume", "linode": 506959, "volume": 12}}'
