@@ -91,6 +91,7 @@ if __name__ == "__main__":
     #print("Volume attached successfully.")
     pcmds = [
         {
+            "command": 1,
             "group_role": "client",
             "data": {
                 "connection": {
