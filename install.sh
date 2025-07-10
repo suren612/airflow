@@ -1,6 +1,11 @@
 if [ "$string1" = "$string2" ]; then
   apk update
   apk add fio
+  apk add py3-pip
+  apk add build-base
+  apk add python3-dev
+  apk add linux-headers
+  pip3 install psutil
 else
   apt update
   apt install -y fio
