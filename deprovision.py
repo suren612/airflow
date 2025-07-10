@@ -5,32 +5,32 @@ import requests
 import time
 
 HEADERS = {}
-def delete_linode(linode_id):
-    url = f"https://api.linode.com/v4/linode/instances/{linode_id}"
-    resp = requests.delete(url, headers=HEADERS)
+def delete_linode(domain, linode_id):
+    url = f"https://{domain}/v4/linode/instances/{linode_id}"
+    resp = requests.delete(url, headers=HEADERS, verify=False)
     #print(resp.text)
     resp.raise_for_status()
     return resp.json()
 
-def detach_volume(vol_id):
-    url = f"https://api.linode.com/v4/volumes/{vol_id}/detach"
-    resp = requests.post(url, headers=HEADERS)
+def detach_volume(domain, vol_id):
+    url = f"https://{domain}/v4/volumes/{vol_id}/detach"
+    resp = requests.post(url, headers=HEADERS, verify=False)
     #print(resp.text)
     resp.raise_for_status()
     return resp.json()
 
-def delete_volume(vol_id):
-    url = f"https://api.linode.com/v4/volumes/{vol_id}"
-    resp = requests.delete(url, headers=HEADERS)
+def delete_volume(domain, vol_id):
+    url = f"https://{domain}/v4/volumes/{vol_id}"
+    resp = requests.delete(url, headers=HEADERS, verify=False)
     #print(resp.text)
     resp.raise_for_status()
     return resp.json()
 
-def wait_for_volume_detachment(volume_id, timeout=120):
-    url = f"https://api.linode.com/v4/volumes/{volume_id}"
+def wait_for_volume_detachment(domain, volume_id, timeout=120):
+    url = f"https://{domain}/v4/volumes/{volume_id}"
     start = time.time()
     while time.time() - start < timeout:
-        resp = requests.get(url, headers=HEADERS)
+        resp = requests.get(url, headers=HEADERS, verify=False)
         resp.raise_for_status()
         if "linode_id" not in resp.json():
             return
@@ -54,6 +54,7 @@ if __name__ == "__main__":
         break
 
     LINODE_API_TOKEN = os.environ["TOKEN"]
+    LINODE_API_DOMAIN = os.environ["LINODE_API_DOMAIN"]
     """
     LINODE_API_TOKEN = ""
     LINODE_ID = "79183117"
@@ -64,8 +65,8 @@ if __name__ == "__main__":
         "Authorization": f"Bearer {LINODE_API_TOKEN}",
         "Content-Type": "application/json"
     }
-    detach_volume(VOLUME_ID)
-    wait_for_volume_detachment(VOLUME_ID)
-    delete_volume(VOLUME_ID)
-    delete_linode(LINODE_ID)
+    detach_volume(LINODE_API_DOMAIN, VOLUME_ID)
+    wait_for_volume_detachment(LINODE_API_DOMAIN, VOLUME_ID)
+    delete_volume(LINODE_API_DOMAIN, VOLUME_ID)
+    delete_linode(LINODE_API_DOMAIN, LINODE_ID)
     #print("Volume attached successfully.")
