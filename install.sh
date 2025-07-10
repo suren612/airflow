@@ -1,4 +1,4 @@
-if [ "$string1" = "$string2" ]; then
+if [ "$CLIENT_IMAGE" = "alpine" ]; then
   apk update
   apk add fio
   apk add py3-pip
