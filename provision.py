@@ -92,7 +92,7 @@ if __name__ == "__main__":
     pcmds = [
         {
             "command": 1,
-            "group_role": "client",
+            "group_role": "groupRoleClient",
             "data": {
                 "connection": {
                     "user": {
