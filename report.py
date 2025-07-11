@@ -18,13 +18,13 @@ pouts_json = json.loads(pouts)
 
 
 task1_out = pouts_json[0][0]["stdout"]
-task2_out = pouts_json[1][0]["stdout"]
-task3_out = pouts_json[2][0]["stdout"]
+task2_out = pouts_json[0][1]["stdout"]
+task3_out = pouts_json[0][2]["stdout"]
 
-cpu_out = json.loads(task1_out["stdout"])
+cpu_out = json.loads(task2_out["stdout"])
 report["cpu_average"] = cpu_out
 
-iops_out = json.loads(task2_out["stdout")
+iops_out = json.loads(task3_out["stdout")
 report["read_iops_average"] = iops_out["read"]
 report["write_iops_average"] = iops_out["write"]
 
@@ -40,7 +40,7 @@ report["write_iops_average"] = iops_out["write"]
 #    break
 
 #for k in task3_out:
-fio_out = json.loads(task3_out["stdout"])
+fio_out = json.loads(task1_out["stdout"])
 jobr = fio_out["jobs"][0]["read"]
 jobw = fio_out["jobs"][0]["write"]
 lat_key = ""
