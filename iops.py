@@ -11,13 +11,18 @@ PARENT_STDOUTS=os.environ["PARENT_STDOUTS"]
 b64 = PARENT_STDOUTS
 utf8 = base64.b64decode(b64)
 pouts = utf8.decode('utf-8')
+#pouts_json = json.loads(pouts)
+#task1_out = json.loads(pouts_json[0][0])
+#for k in task1_out:
+#    disk_out = task1_out[k]["stdout"]["stdout"]
+#    #print(disk_out)
+#    disk = disk_out["path"]
+#    break
+
 pouts_json = json.loads(pouts)
-task1_out = json.loads(pouts_json[0][0])
-for k in task1_out:
-    disk_out = task1_out[k]["stdout"]["stdout"]
-    #print(disk_out)
-    disk = disk_out["path"]
-    break
+task1_out = pouts_json[0][0]["stdout"]
+disk_out = json.loads(task1_out["stdout"])
+disk = disk_out["path"]
 
 disk = str(Path(disk).resolve())
 disk = os.path.basename(disk)
