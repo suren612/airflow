@@ -21,7 +21,7 @@ task1_out = pouts_json[0][0]["stdout"]
 task2_out = pouts_json[1][0]["stdout"]
 task3_out = pouts_json[2][0]["stdout"]
 
-cpu_out = json.loads(task2_out["stdout"])
+cpu_out = task2_out["stdout"]
 report["cpu_average"] = cpu_out
 
 iops_out = json.loads(task3_out["stdout"])
