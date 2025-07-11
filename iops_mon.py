@@ -20,4 +20,4 @@ stats = {
   "disk": disk,
   "iops": 12000
 }
-print(stats)
+print(json.dumps(stats))
