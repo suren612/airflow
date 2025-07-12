@@ -25,8 +25,10 @@ cpu_out = task2_out["stdout"]
 report["cpu_average"] = cpu_out
 
 iops_out = json.loads(task3_out["stdout"])
-report["read_iops_average"] = iops_out["iops"]
-report["write_iops_average"] = iops_out["iops"]
+report["cluster_read_iops_average"] = iops_out["read_iops_average"]
+report["cluster_write_iops_average"] = iops_out["write_iops_average"]
+report["cluster_read_latency_us_average"] = iops_out["read_latency_us"]
+report["cluster_write_latency_us_average"] = iops_out["write_latency_us"]
 
 #for k in task1_out:
 #    cpu_out = task1_out[k]["stdout"]["stdout"]
