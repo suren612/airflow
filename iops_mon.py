@@ -47,8 +47,8 @@ for stat in iops:
         lat_rd += img["read_latency"] * iops_rd
 
 report = {
-    "write_iops": iops_wr,
-    "read_iops": iops_rd,
+    "write_iops_average": iops_wr / len(iops) if len(iops) > 0 else 0,
+    "read_iops_average": iops_rd / len(iops) if len(iops) > 0 else 0,
     "write_latency_ms": (lat_wr / iops_wr) if iops_wr > 0 else 0,
     "read_latency_ms": (lat_rd / iops_rd) if iops_rd > 0 else 0,
 }
