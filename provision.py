@@ -99,7 +99,7 @@ if __name__ == "__main__":
                         "value": "root"
                     },
                     "sshKey": {
-                        "value": "/opt/airflow/config/key"
+                        "value": "/opt/airflow/secrets/swijeyas-test-2025-06-04"
                     }
                 },
                 "machines": [
