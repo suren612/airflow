@@ -24,7 +24,7 @@ task3_out = pouts_json[2][0]["stdout"]
 cpu_out = task2_out["stdout"]
 report["cpu"] = cpu_out
 report["iops"] = json.loads(task3_out["stdout"])
-repoort["fio"] = json.loads(task1_out["stdout"])
+report["fio"] = json.loads(task1_out["stdout"])
 
 msg = json.dumps(report)
 
