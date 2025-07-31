@@ -16,7 +16,7 @@ def create_linode(domain, password, region="us-east", image="linode/ubuntu24.04"
         "authorized_keys": ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDW3F/rcfXIjElkQ/zL6HIXOfNjUNuFFK4ErGSdXaoByLBB9TBaqIArWNoqktiz8211WXXucLNm1T4kn5LrouFQ/p95li/tBU+rQ+bCNfAiZ6OMnkFIZa7I8r6ENFzbmRbdHs4n0r9CB3LxGaa4+Y8Tw1zGhJAWl1EBdnRKxVLdqIdk4WWv1WRNBt3py87hX+u5yAld/y96SWVpZIZJRnyq1uXz4uwoc5bGGwIchkU9bHESawQWTHDTKXoAX3p7INWKXvHYtopOfohRwyGPTCHP820OM/0m6CRSnwBpUc2+N3Pa9blnqkxuczGjHWZxO8kesBaAfxalJzj+v6PaxMM/ swijeyas-test-2025-06-04"]
     }
     if firewall != None:
-        payload["firewall_id"] = firewall
+        payload["firewall_id"] = int(firewall)
     resp = requests.post(url, json=payload, headers=HEADERS, verify=False)
     #print(resp.text)
     resp.raise_for_status()
